@@ -19,28 +19,32 @@ class GroceryListItem extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   done: false
-    // };
+    this.state = {
+      hover: false
+    };
   }
 
-  // onListItemClick() {
-  //   this.setState({
-  //     done: !this.state.done
-  //   });
-  // }
+  toggleHover() {
+    this.setState({hover: !this.state.hover});
+  }
 
   render() {
+    var hoverStyle;
+    if (this.state.hover) {
+      hoverStyle = {fontWeight: 'bold'}
+    } else {
+      hoverStyle = {fontWeight: 'normal'}
+    }
     return (
-      <li>{this.props.groceryItems}</li>
+      <li style={hoverStyle} onMouseEnter={this.toggleHover.bind(this)} onMouseLeave={this.toggleHover.bind(this)}>{this.props.groceryItem}</li>
     );
   }
 }
 
 var GroceryList = (props) => (
   <ul>
-    {props.groceryItems.map(groceryItems =>
-      <GroceryListItem groceryItems={groceryItems} />
+    {props.groceryItems.map(groceryItem =>
+      <GroceryListItem groceryItem={groceryItem} />
     )}
   </ul>
 );
